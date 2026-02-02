@@ -5,6 +5,5 @@ node_modules
 .output
 dist
 .DS_Store
-.env
 *.log
 .yarn/install-state.gz
