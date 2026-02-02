@@ -1,6 +1,9 @@
 <template>
   <AppCard :title="title">
-    <div :class="$style.structure">Structure image not implemented</div>
+    <ChemicalStructureImage
+      :smiles="chemicalProperties?.smiles || ''"
+      :name="chemicalProperties?.name || ''"
+    />
     <AppKeyValueList :items="items" />
     <p v-if="casMismatch" :class="$style.warning">
       Query CAS does not match mock data: {{ casParam }}
@@ -12,6 +15,7 @@
 import { computed } from "vue"
 import AppCard from "../base/AppCard.vue"
 import AppKeyValueList from "../base/AppKeyValueList.vue"
+import ChemicalStructureImage from "../base/ChemicalStructureImage.vue"
 import { useChemicalContext } from "../../composables/chemicalContext"
 import { useFormatters } from "../../composables/useFormatters"
 import { NA } from "../../composables/constants"
@@ -59,15 +63,6 @@ const items = computed(() => {
 </script>
 
 <style module lang="scss">
-.structure {
-  border: 1px dashed #cbd2d9;
-  border-radius: 10px;
-  padding: 24px;
-  text-align: center;
-  color: #7b8794;
-  margin-bottom: 16px;
-}
-
 .warning {
   margin-top: 12px;
   font-size: 12px;

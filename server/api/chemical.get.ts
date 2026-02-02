@@ -1,26 +1,30 @@
 import axios from "axios"
-
 import { defineEventHandler, getQuery } from "h3"
-import { raw } from "./mocked"
+import { withCache } from "../utils/cache"
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const cas = typeof query.cas === "string" ? query.cas : ""
 
-  // TODO: Replace mock with real API call when you're ready.
-  // Example (returns real JSON):
-  // const response = await axios.post(
-  //   "https://episuite.dev/EpiWebSuite/api/submit",
-  //   { cas }
-  // )
-  // const data = response.data
 
-  
- 
-  const data = raw;
+  if (!cas) {
+    return { cas, data: null, cached: false }
+  }
+
+  const config = useRuntimeConfig()
+
+  const cacheKey = `episuite:${cas}`
+  const { value: data, cached } = await withCache(cacheKey, async () => {
+    const response = await axios.get(
+      `${config.public.episuiteBaseUrl}/api/submit?cas=${encodeURIComponent(cas)}`,
+      { timeout: 15000 }
+    )
+    return response.data
+  })
 
   return {
     cas,
     data,
+    cached,
   }
 })
