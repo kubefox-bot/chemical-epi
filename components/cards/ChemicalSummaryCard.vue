@@ -9,6 +9,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue"
+import AppCard from "../base/AppCard.vue"
+import AppKeyValueList from "../base/AppKeyValueList.vue"
+import { useChemicalContext } from "../../composables/chemicalContext"
+import { useFormatters } from "../../composables/useFormatters"
+
 const { chemicalProperties, displayCas, casMismatch, casParam } = useChemicalContext()
 const { formatNumber } = useFormatters()
 

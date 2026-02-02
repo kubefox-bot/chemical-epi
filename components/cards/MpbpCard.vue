@@ -18,7 +18,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ExperimentalValue } from "~/composables/useFormatters"
+import { computed } from "vue"
+import AppCard from "../base/AppCard.vue"
+import AppMetric from "../base/AppMetric.vue"
+import AppTable from "../base/AppTable.vue"
+import AppTabs from "../base/AppTabs.vue"
+import { useChemicalContext } from "../../composables/chemicalContext"
+import { useFormatters } from "../../composables/useFormatters"
+import type { ExperimentalValue } from "../../composables/useFormatters"
 
 const { chemical } = useChemicalContext()
 const { formatWithUnit, formatReference } = useFormatters()

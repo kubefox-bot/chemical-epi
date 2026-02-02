@@ -1,57 +1,6 @@
 <template>
-  <div class="page">
-    <NuxtRouteAnnouncer />
-    <header class="page__header">
-      <div>
-        <h1 class="page__title">Results</h1>
-        <p class="page__subtitle">CAS: {{ displayCas || "N/A" }}</p>
-      </div>
-      <span class="page__pill">Mock data</span>
-    </header>
-
-    <div v-if="pending" class="state">Loading data...</div>
-    <div v-else-if="error" class="state state--error">
-      Failed to load mock data.
-    </div>
-    <div v-else class="grid">
-      <ChemicalSummaryCard />
-      <div class="stack">
-        <LogKowCard />
-        <MpbpCard />
-      </div>
-    </div>
-  </div>
+  <NuxtPage />
 </template>
-
-<script setup lang="ts">
-const route = useRoute()
-const casParam = computed(() => {
-  const value = route.query.cas
-  if (Array.isArray(value)) return value[0] || ""
-  return value ? String(value) : ""
-})
-
-const { data, pending, error } = await useFetch("/api/chemical", {
-  query: { cas: casParam },
-})
-
-const chemical = computed(() => data.value?.data || null)
-const chemicalProperties = computed(() => chemical.value?.chemicalProperties || null)
-
-const displayCas = computed(() => casParam.value || chemicalProperties.value?.cas || "")
-const casMismatch = computed(() => {
-  const dataCas = chemicalProperties.value?.cas
-  return Boolean(casParam.value && dataCas && casParam.value !== dataCas)
-})
-
-provideChemicalContext({
-  chemical,
-  chemicalProperties,
-  displayCas,
-  casParam,
-  casMismatch,
-})
-</script>
 
 <style>
 .page {

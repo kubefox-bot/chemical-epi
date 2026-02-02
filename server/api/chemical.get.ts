@@ -1,6 +1,6 @@
 import axios from "axios"
 
-import { getQuery } from "h3"
+import { defineEventHandler, getQuery } from "h3"
 import { raw } from "./mocked"
 
 export default defineEventHandler(async (event) => {
