@@ -4,12 +4,12 @@ type CacheEntry<T> = {
 }
 
 const cache = new Map<string, CacheEntry<unknown>>()
-const CACHE_TTL_MS = 10 * 60 * 1000 //10 Минут
-
+const DEFAULT_TTL_MS = 10 * 60 * 1000
 
 export const withCache = async <T>(
   key: string,
-  fetcher: () => Promise<T>
+  fetcher: () => Promise<T>,
+  ttlMs = DEFAULT_TTL_MS
 ): Promise<{ value: T; cached: boolean }> => {
   const now = Date.now()
   const existing = cache.get(key)
@@ -19,7 +19,7 @@ export const withCache = async <T>(
   }
 
   const value = await fetcher()
-  cache.set(key, { value, expiresAt: now + CACHE_TTL_MS })
+  cache.set(key, { value, expiresAt: now + ttlMs })
 
   return { value, cached: false }
 }

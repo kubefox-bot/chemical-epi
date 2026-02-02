@@ -6,7 +6,6 @@ export type ChemicalContext = {
   chemicalProperties: ComputedRef<any | null>
   displayCas: ComputedRef<string>
   casParam: ComputedRef<string>
-  casMismatch: ComputedRef<boolean>
 }
 
 const chemicalContextKey: InjectionKey<ChemicalContext> = Symbol("chemicalContext")

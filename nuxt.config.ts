@@ -1,13 +1,19 @@
 import { defineNuxtConfig } from "nuxt/config";
 
+const episuiteBaseUrl = process.env.EPISUITE_BASE_URL;
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
+  compatibilityDate: "2026-02-03",
   devtools: { enabled: true },
+  modules: ["@nuxt/image"],
+  image: {
+    domains: ["episuite.dev"],
+  },
   runtimeConfig: {
-    episuiteBaseUrl: process.env.EPISUITE_BASE_URL || "https://episuite.dev",
+    episuiteBaseUrl,
     public: {
-      episuiteBaseUrl: process.env.EPISUITE_BASE_URL || "https://episuite.dev",
+      episuiteBaseUrl,
     },
   },
 })

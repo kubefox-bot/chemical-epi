@@ -1,10 +1,13 @@
 <template>
   <div :class="$style.wrapper">
     <template v-if="smiles && !hasError">
-      <img
+      <NuxtImg
         :class="$style.image"
         :src="imageUrl"
         :alt="altText"
+        :width="400"
+        :height="200"
+        fit="contain"
         @error="onError"
       />
     </template>
@@ -35,7 +38,7 @@ const hasError = ref(false)
 
 const config = useRuntimeConfig()
 const baseUrl = computed(
-  () => config.public.episuiteBaseUrl || "https://episuite.dev"
+  () => config.public.episuiteBaseUrl
 )
 
 const imageUrl = computed(() => {

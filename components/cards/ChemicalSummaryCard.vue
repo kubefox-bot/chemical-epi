@@ -5,9 +5,6 @@
       :name="chemicalProperties?.name || ''"
     />
     <AppKeyValueList :items="items" />
-    <p v-if="casMismatch" :class="$style.warning">
-      Query CAS does not match mock data: {{ casParam }}
-    </p>
   </AppCard>
 </template>
 
@@ -20,7 +17,7 @@ import { useChemicalContext } from "../../composables/chemicalContext"
 import { useFormatters } from "../../composables/useFormatters"
 import { NA } from "../../composables/constants"
 
-const { chemicalProperties, displayCas, casMismatch, casParam } = useChemicalContext()
+const { chemicalProperties, displayCas } = useChemicalContext()
 const { formatNumber } = useFormatters()
 
 const title = computed(() => chemicalProperties.value?.name || "Unknown Chemical")

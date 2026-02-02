@@ -20,7 +20,7 @@ withDefaults(
   {
     noDataText: "No Data",
     loadingText: "Loading data...",
-    errorText: "Failed to load mock data.",
+    errorText: "Failed  data.",
   }
 )
 </script>
