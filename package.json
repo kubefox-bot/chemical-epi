@@ -9,9 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "ts": "tsc --noEmit",
-    "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "lintjs": "eslint ."
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",
