@@ -5,9 +5,11 @@ export type ExperimentalValue = {
   units?: string | null
 }
 
+import { NA } from "./constants"
+
 export const useFormatters = () => {
   const formatNumber = (value: unknown, digits = 2) => {
-    if (value === null || value === undefined || value === "") return "N/A"
+    if (value === null || value === undefined || value === "") return NA
     const num = Number(value)
     if (Number.isNaN(num)) return String(value)
     return num.toFixed(digits)
@@ -21,17 +23,17 @@ export const useFormatters = () => {
 
   const formatWithUnit = (value: unknown, unit?: string | null, digits = 2) => {
     const formatted = formatNumber(value, digits)
-    if (formatted === "N/A") return formatted
+    if (formatted === NA) return formatted
     const label = unitLabel(unit)
     return label ? `${formatted} ${label}` : formatted
   }
 
   const formatReference = (entry?: ExperimentalValue | null) => {
-    if (!entry) return "N/A"
+    if (!entry) return NA
     const author = entry.author || ""
     const year = entry.year ? String(entry.year) : ""
     const suffix = author && year ? ` (${year})` : year
-    return `${author}${suffix}` || "N/A"
+    return `${author}${suffix}` || NA
   }
 
   return {

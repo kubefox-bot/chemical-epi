@@ -1,8 +1,8 @@
 <template>
   <AppCard :title="title">
-    <div class="structure">Structure image not implemented</div>
+    <div :class="$style.structure">Structure image not implemented</div>
     <AppKeyValueList :items="items" />
-    <p v-if="casMismatch" class="warning">
+    <p v-if="casMismatch" :class="$style.warning">
       Query CAS does not match mock data: {{ casParam }}
     </p>
   </AppCard>
@@ -14,6 +14,7 @@ import AppCard from "../base/AppCard.vue"
 import AppKeyValueList from "../base/AppKeyValueList.vue"
 import { useChemicalContext } from "../../composables/chemicalContext"
 import { useFormatters } from "../../composables/useFormatters"
+import { NA } from "../../composables/constants"
 
 const { chemicalProperties, displayCas, casMismatch, casParam } = useChemicalContext()
 const { formatNumber } = useFormatters()
@@ -24,16 +25,16 @@ const molecularFormulaHtml = computed(
 )
 
 const items = computed(() => {
-  const formulaFallback = chemicalProperties.value?.molecularFormula || "N/A"
+  const formulaFallback = chemicalProperties.value?.molecularFormula || NA
 
   return [
     {
       label: "Systematic Name",
-      value: chemicalProperties.value?.systematicName || "N/A",
+      value: chemicalProperties.value?.systematicName || NA,
     },
     {
       label: "CAS RN",
-      value: displayCas.value || "N/A",
+      value: displayCas.value || NA,
     },
     molecularFormulaHtml.value
       ? {
@@ -50,9 +51,26 @@ const items = computed(() => {
     },
     {
       label: "SMILES",
-      value: chemicalProperties.value?.smiles || "N/A",
+      value: chemicalProperties.value?.smiles || NA,
       monospace: true,
     },
   ]
 })
 </script>
+
+<style module lang="scss">
+.structure {
+  border: 1px dashed #cbd2d9;
+  border-radius: 10px;
+  padding: 24px;
+  text-align: center;
+  color: #7b8794;
+  margin-bottom: 16px;
+}
+
+.warning {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #b45309;
+}
+</style>

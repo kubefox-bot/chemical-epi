@@ -1,8 +1,8 @@
 <template>
   <AppCard title="Log Kow" subtitle="Octanol-Water Partition Coefficient">
     <AppTabs :items="tabs" :active-index="0" />
-    <div class="split">
-      <div class="metric-stack">
+    <div :class="$style.split">
+      <div :class="$style.metricStack">
         <AppMetric
           label="Experimental Log Kow"
           :value="formatNumber(logKowSelected?.value, 2)"
@@ -44,3 +44,22 @@ const rows = computed(() => [
   ],
 ])
 </script>
+
+<style module lang="scss">
+.split {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+}
+
+.metricStack {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
