@@ -21,12 +21,13 @@ import PageHeader from "../../components/base/PageHeader.vue"
 import ChemicalSummaryCard from "../../components/cards/ChemicalSummaryCard.vue"
 import StatTableCard from "../../components/cards/StatTableCard.vue"
 import PageLayout from "../../components/layouts/PageLayout.vue"
+import type { ApiResponse, ChemicalData } from "../../composables/chemicalTypes"
 import { useCasGuard } from "../../composables/useCasGuard"
 import { useChemicalPageBuilder } from "../builders/chemicalPageBuilder"
 
 const { casParam, isAllowedCas } = useCasGuard("002921-88-2")
 
-const { data, pending, error } = await useFetch<{ data: unknown }>(
+const { data, pending, error } = await useFetch<ApiResponse<ChemicalData>>(
   "/api/chemical",
   {
   query: { cas: casParam },

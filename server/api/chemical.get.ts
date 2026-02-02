@@ -13,11 +13,11 @@ export default defineEventHandler(async (event) => {
 
   const config = useRuntimeConfig()
 
-  const cacheKey = `episuite:${cas}`
+  const cacheKey = `${config.public.episuiteBaseUrl}:${cas}`
   const { value: data, cached } = await withCache(cacheKey, async () => {
     const response = await axios.get(
       `${config.public.episuiteBaseUrl}/api/submit?cas=${encodeURIComponent(cas)}`,
-      { timeout: 15000 }
+      { timeout: Number(config.requestTimeout) } 
     )
     return response.data
   })

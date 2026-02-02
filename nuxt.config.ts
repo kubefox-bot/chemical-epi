@@ -1,8 +1,9 @@
 import { defineNuxtConfig } from "nuxt/config";
 
 const episuiteBaseUrl = process.env.EPISUITE_BASE_URL;
+const cacheTtl = process.env.CACHE_TTL ?? "600000";
+const requestTimeout = process.env.REQ_TIMEOUT ?? "15000";
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2026-02-03",
   devtools: { enabled: true },
@@ -12,8 +13,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     episuiteBaseUrl,
+    cacheTtl,
+    requestTimeout,
     public: {
       episuiteBaseUrl,
+      requestTimeout
     },
   },
 })
