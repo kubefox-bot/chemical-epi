@@ -3,7 +3,7 @@
     <template #header>
       <PageHeader title="Results" :subtitle="headerSubtitle" />
     </template>
-    <AppState :allowed="isAllowedCas" :pending="pending" :error="error">
+    <AppState :pending="pending" :error="error">
       <div :class="$style.grid">
         <ChemicalSummaryCard />
         <div :class="$style.stack">
@@ -25,7 +25,7 @@ import type { ApiResponse, ChemicalData } from "../../composables/chemicalTypes"
 import { useCasGuard } from "../../composables/useCasGuard"
 import { useChemicalPageBuilder } from "../builders/chemicalPageBuilder"
 
-const { casParam, isAllowedCas } = useCasGuard("002921-88-2")
+const { casParam } = useCasGuard()
 
 const { data, pending, error } = await useFetch<ApiResponse<ChemicalData>>(
   "/api/chemical",
@@ -36,7 +36,6 @@ const { data, pending, error } = await useFetch<ApiResponse<ChemicalData>>(
 
 const { headerSubtitle, tableCards } = useChemicalPageBuilder({
   data,
-  isAllowedCas,
   casParam,
 })
 </script>

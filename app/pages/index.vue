@@ -1,6 +1,6 @@
 <template>
   <PageLayout>
-    <AppState :allowed="false" :pending="false" />
+    <AppState :pending="false" :show-no-data="true" />
   </PageLayout>
 </template>
 

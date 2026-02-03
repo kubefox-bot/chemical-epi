@@ -7,7 +7,6 @@ import type { ExperimentalValue } from "../../composables/useFormatters"
 
 type BuilderInput = {
   data: Ref<ApiResponse<ChemicalData> | null | undefined>
-  isAllowedCas: ComputedRef<boolean>
   casParam: ComputedRef<string>
 }
 
@@ -18,11 +17,10 @@ type BuilderInput = {
  */
 export const useChemicalPageBuilder = ({
   data,
-  isAllowedCas,
   casParam,
 }: BuilderInput) => {
   const chemical = computed<ChemicalData | null>(() =>
-    isAllowedCas.value ? data.value?.data ?? null : null
+    data.value?.data ?? null
   )
   const chemicalProperties = computed(
     () => chemical.value?.chemicalProperties ?? null

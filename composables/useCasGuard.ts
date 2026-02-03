@@ -1,7 +1,8 @@
 import { computed } from "vue"
 import { useRoute } from "vue-router"
 
-export const useCasGuard = (allowedCas: string) => {
+
+export const useCasGuard = () => {
   const route = useRoute()
 
   const casParam = computed(() => {
@@ -10,11 +11,7 @@ export const useCasGuard = (allowedCas: string) => {
     return value ? String(value) : ""
   })
 
-  const isAllowedCas = computed(() => casParam.value === allowedCas)
-
   return {
     casParam,
-    isAllowedCas,
-    allowedCas,
   }
 }

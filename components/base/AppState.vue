@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!allowed" :class="$style.statusPanel">{{ noDataText }}</div>
+  <div v-if="showNoData" :class="$style.statusPanel">{{ noDataText }}</div>
   <div v-else-if="pending" :class="$style.statusPanel">{{ loadingText }}</div>
   <div v-else-if="error" :class="[$style.statusPanel, $style.statusPanelError]">
     {{ errorText }}
@@ -10,14 +10,15 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    allowed: boolean
     pending: boolean
     error?: unknown
+    showNoData?: boolean
     noDataText?: string
     loadingText?: string
     errorText?: string
   }>(),
   {
+    showNoData: false,
     noDataText: "No Data",
     loadingText: "Loading data...",
     errorText: "Failed  data.",
