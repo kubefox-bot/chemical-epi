@@ -1,75 +1,42 @@
-# Nuxt Minimal Starter
+# Nuxt EPI Suite Demo
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Небольшое приложение, которое запрашивает данные по CAS и показывает первые карточки результата.
 
-## Setup
+## Запуск через Docker
 
-Make sure to install dependencies:
+Алгоритм:
+1) `just docker-build`
+2) `just docker-run`
+3) Открыть `http://localhost:3000/cas=002921-88-2`
 
+## Запуск через Yarn
+
+Установка зависимостей:
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
 yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
+Запуск dev-сервера:
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
 yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+Открыть в браузере:
+```
+http://localhost:3000/cas=002921-88-2
 ```
 
-Locally preview production build:
+## Как искать CAS
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+Формат URL:
+```
+http://localhost:3000/cas=ВАШ_CAS
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Примеры:
+```
+http://localhost:3000/cas=002921-88-2
+http://localhost:3000/cas=005598-13-0
+```
+
+Если API вернет данные — они отобразятся в карточках.
