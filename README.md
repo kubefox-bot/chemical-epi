@@ -4,6 +4,10 @@
 
 ## Запуск через Docker
 
+Подготовка:
+1) Docker
+2) Justfile
+
 Алгоритм:
 1) `just docker-build`
 2) `just docker-run`
@@ -13,7 +17,7 @@
 
 Установка зависимостей:
 ```bash
-yarn install
+yarn
 ```
 
 Запуск dev-сервера:
